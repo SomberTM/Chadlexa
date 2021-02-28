@@ -6,6 +6,7 @@ public class Program {
     static Audio.Capture audioCapture;
 
     public static void main(String[] args) {
+
         InputDeviceSelector gui = InputDeviceSelector.spawn();
         Class<GUI.Button> cast = GUI.Button.class;
 
@@ -21,7 +22,11 @@ public class Program {
         gui.getButton("button_playback", cast).onClick(event -> {
             new Audio.Playback(Program.audioCapture).playback();
         });
-        
+
+        gui.getButton("button_save_device", cast).onClick(event -> {
+            InputDeviceSelector.config.set("audio_device", InputDeviceSelector.getSelectedMixerName());
+        });
+
     }
 
 }

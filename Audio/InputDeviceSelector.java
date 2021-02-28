@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 public class InputDeviceSelector extends GUI.Manager {
 
     public static InputDeviceSelector singleton;
+    public static Chad.File config = new Chad.File("config.chad");
 
     // Define as private because we dont want any outside instances to be created
     private InputDeviceSelector() {
@@ -39,13 +40,17 @@ public class InputDeviceSelector extends GUI.Manager {
         String[] mixers = Utils.Audio.listMixers().toArray(new String[0]);
 
         JComboBox<String> selection = new JComboBox<String>(mixers);
+        
         selection.setMaximumSize(selection.getPreferredSize());
         selection.setAlignmentX(Component.CENTER_ALIGNMENT);
         singleton.addComboBox(mainPanel, selection, "combo_device_selector");
 
-        // JPanel buttonPanel = new JPanel();
-        // buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
-        // singleton.addPanel(buttonPanel);
+        // Attempt to load in audio device from config
+        try {
+            String device = config.get("audio_device");
+            if (device != null)
+                selection.setSelectedItem(device);
+        } catch (Exception e) {}
 
         GUI.Button capture = new GUI.Button("Capture");
         capture.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -59,16 +64,20 @@ public class InputDeviceSelector extends GUI.Manager {
         playback.setAlignmentX(Component.CENTER_ALIGNMENT);
         singleton.addButton(mainPanel, playback, "button_playback");
 
+        GUI.Button save = new GUI.Button("Save device");
+        save.setAlignmentX(Component.CENTER_ALIGNMENT);
+        singleton.addButton(mainPanel, save, "button_save_device");
+
         singleton.window.setVisible(true);
         return singleton;
     }
 
-    public static String getSelectedAudioDeviceName() {
+    public static String getSelectedMixerName() {
         return (String) singleton.getComboBox("combo_device_selector").getSelectedItem();
     }
 
     public static Mixer getSelectedMixer() {
-        return Utils.Audio.findMixer(mixer -> mixer.getMixerInfo().getName().equals(getSelectedAudioDeviceName()));
+        return Utils.Audio.findMixer(mixer -> mixer.getMixerInfo().getName().equals(getSelectedMixerName()));
     }
 
 }
