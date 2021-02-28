@@ -11,6 +11,8 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Mixer;
 
 public class Audio {
+
+    private Audio() {}
     
     public static List<Mixer.Info> getMixerInfo() {  
         return new ArrayList<Mixer.Info>(Arrays.asList(AudioSystem.getMixerInfo()));
@@ -44,7 +46,14 @@ public class Audio {
     }
 
     public static AudioFormat getBasicAudioFormat() {
-        float sampleRate = 8000.0f;
+        /**
+         Sample rate in samples per second.  (Allowable values include 8000, 11025, 16000, 22050, and 44100 samples per second.)
+         Sample size in bits.  (Allowable values include 8 and 16 bits per sample.)
+         Number of channels.  (Allowable values include 1 channel for mono and 2 channels for stereo.)
+         Signed or unsigned data.  (Allowable values include true and false for signed data or unsigned data.)
+         Big-endian or little-endian order.  (This has to do with the order in which the data bytes are stored in memory.  You can learn about this topic here.)
+         */
+        float sampleRate = 44100.0f;
         int sampleSizeInBits = 16;
         int channels = 1;
         boolean signed = true;

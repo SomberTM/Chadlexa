@@ -7,6 +7,8 @@ import java.util.function.Consumer;
 
 public class Functional {
     
+    private Functional() {}
+
     @FunctionalInterface
     public static interface Void {
         void dispose();
