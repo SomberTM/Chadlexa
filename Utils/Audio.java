@@ -45,6 +45,34 @@ public class Audio {
         return AudioSystem.getMixer(info);
     }
 
+    public static enum Quality {
+        LOW,
+        MEDIUM,
+        HIGH
+    }
+
+    public static AudioFormat getAudioFormat(Quality quality) {
+        float sampleRate = 8000.0f;
+        int sampleSizeInBits = 8;
+        int channels = 1;
+        boolean signed = true;
+        boolean bigEndian = false;
+        switch (quality) {
+            case HIGH:
+                sampleRate = 44100.0f;
+                sampleSizeInBits = 16;
+                channels = 2;
+                break;
+            case MEDIUM:
+                sampleRate = 16000.0f;
+                sampleSizeInBits = 16;
+                break;
+            case LOW:
+                break;
+        }
+        return new AudioFormat(sampleRate, sampleSizeInBits, channels, signed, bigEndian);
+    }
+
     public static AudioFormat getBasicAudioFormat() {
         /**
          Sample rate in samples per second.  (Allowable values include 8000, 11025, 16000, 22050, and 44100 samples per second.)

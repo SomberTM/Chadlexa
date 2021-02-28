@@ -22,7 +22,7 @@ public class Playback {
     public void playback() { 
         try {
             this.playback(this.capture.getCapturedData().toByteArray()); 
-        } catch (NullPointerException exception) {
+        } catch (Exception exception) {
             System.out.println("No audio to playback");
         }
     }

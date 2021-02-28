@@ -14,6 +14,7 @@ public class File {
     static String extension = "chad";
 
     public java.io.File source;
+    public Map<String, String> content = new HashMap<String, String>();
 
     public File(java.io.File file) {
         this.source = file;
@@ -24,13 +25,13 @@ public class File {
     }
 
     public Map<String, String> parse() throws UnsupportedFileExtensionException, FileNotFoundException { return File.parse(this.source); }
+    public void load() { try { this.content = this.parse(); } catch(Exception e) {} }
     public String get(String key) {
-        try {
-            return this.parse().get(key);
-        } catch (Exception e) {  }
-        return null;
+        this.load();
+        return this.content.get(key);
     }
     public void set(String key, String value) { File.set(this.source, key, value); }
+
 
     @SuppressWarnings("serial")
     static class UnsupportedFileExtensionException extends Exception {
