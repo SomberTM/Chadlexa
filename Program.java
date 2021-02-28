@@ -24,7 +24,9 @@ public class Program {
         });
 
         gui.getButton("button_save_device", cast).onClick(event -> {
-            InputDeviceSelector.config.set("audio_device", InputDeviceSelector.getSelectedMixerName());
+            String device = InputDeviceSelector.getSelectedMixerName();
+            InputDeviceSelector.config.set("audio_device", device);
+            System.out.println("Set default audio device to \"" + device + "\"");
         });
 
     }

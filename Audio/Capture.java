@@ -9,7 +9,7 @@ import javax.sound.sampled.TargetDataLine;
 
 public class Capture {
 
-    public AudioFormat format = Utils.Audio.getBasicAudioFormat();
+    public AudioFormat format = Utils.Audio.getAudioFormat(Utils.Audio.Quality.HIGH);
     public DataLine.Info dataLineInfo;
     public Mixer mixer;
 
