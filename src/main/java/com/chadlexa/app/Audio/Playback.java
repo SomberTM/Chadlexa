@@ -1,4 +1,4 @@
-package Audio;
+package src.main.java.com.chadlexa.app.Audio;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -7,6 +7,8 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.DataLine;
 import javax.sound.sampled.SourceDataLine;
+
+import src.main.java.com.chadlexa.app.Utils.Functional;
 
 public class Playback {
     
@@ -38,7 +40,7 @@ public class Playback {
         } catch (Exception e) { System.out.println("Error formatting playback audio"); }
 
         if (this.audioInputStream != null && this.sourceDataLine != null)
-            Utils.Functional.createThread(() -> {
+            Functional.createThread(() -> {
                 try {
                     int content;
         
