@@ -1,4 +1,4 @@
-package Chad;
+package src.main.java.com.chadlexa.app.Chad;
 
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

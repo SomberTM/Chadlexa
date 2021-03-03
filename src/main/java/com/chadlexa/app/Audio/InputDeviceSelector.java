@@ -1,4 +1,4 @@
-package Audio;
+package src.main.java.com.chadlexa.app.Audio;
 
 import java.awt.Component;
 
@@ -9,10 +9,15 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class InputDeviceSelector extends GUI.Manager {
+import src.main.java.com.chadlexa.app.Chad.File;
+import src.main.java.com.chadlexa.app.GUI.Button;
+import src.main.java.com.chadlexa.app.GUI.Manager;
+import src.main.java.com.chadlexa.app.Utils.Audio;
+
+public class InputDeviceSelector extends Manager {
 
     public static InputDeviceSelector singleton;
-    public static Chad.File config = new Chad.File("config.chad");
+    public static File config = new File("config.chad");
 
     // Define as private because we dont want any outside instances to be created
     private InputDeviceSelector() {
@@ -37,7 +42,7 @@ public class InputDeviceSelector extends GUI.Manager {
         label.setAlignmentX(Component.CENTER_ALIGNMENT);
         singleton.addLabel(mainPanel, label);
 
-        String[] mixers = Utils.Audio.listMixers().toArray(new String[0]);
+        String[] mixers = Audio.listMixers().toArray(new String[0]);
 
         JComboBox<String> selection = new JComboBox<String>(mixers);
         
@@ -52,19 +57,19 @@ public class InputDeviceSelector extends GUI.Manager {
                 selection.setSelectedItem(device);
         } catch (Exception e) {}
 
-        GUI.Button capture = new GUI.Button("Capture");
+        Button capture = new Button("Capture");
         capture.setAlignmentX(Component.CENTER_ALIGNMENT);
         singleton.addButton(mainPanel, capture, "button_capture");
 
-        GUI.Button stop = new GUI.Button("Stop");
+        Button stop = new Button("Stop");
         stop.setAlignmentX(Component.CENTER_ALIGNMENT);
         singleton.addButton(mainPanel, stop, "button_stop");
 
-        GUI.Button playback = new GUI.Button("Playback");
+        Button playback = new Button("Playback");
         playback.setAlignmentX(Component.CENTER_ALIGNMENT);
         singleton.addButton(mainPanel, playback, "button_playback");
 
-        GUI.Button save = new GUI.Button("Save device");
+        Button save = new Button("Save device");
         save.setAlignmentX(Component.CENTER_ALIGNMENT);
         singleton.addButton(mainPanel, save, "button_save_device");
 
@@ -77,7 +82,7 @@ public class InputDeviceSelector extends GUI.Manager {
     }
 
     public static Mixer getSelectedMixer() {
-        return Utils.Audio.findMixer(mixer -> mixer.getMixerInfo().getName().equals(getSelectedMixerName()));
+        return Audio.findMixer(mixer -> mixer.getMixerInfo().getName().equals(getSelectedMixerName()));
     }
 
 }

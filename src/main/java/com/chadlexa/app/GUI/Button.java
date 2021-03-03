@@ -1,4 +1,4 @@
-package GUI;
+package src.main.java.com.chadlexa.app.GUI;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,6 +6,8 @@ import java.util.function.Consumer;
 
 import javax.swing.Icon;
 import javax.swing.JButton;
+
+import src.main.java.com.chadlexa.app.Utils.Functional;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -39,7 +41,7 @@ public class Button extends JButton {
     public void onClick(Consumer<ActionEvent> consumer) {
         this.listeners.add(consumer);
         if (this.listener == null) 
-            this.addActionListener( (this.listener = Utils.Functional.createActionListener((event) -> {
+            this.addActionListener( (this.listener = Functional.createActionListener((event) -> {
                 for (Consumer<ActionEvent> c : this.listeners)
                     c.accept(event);
             })) );

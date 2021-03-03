@@ -1,4 +1,4 @@
-package GUI;
+package src.main.java.com.chadlexa.app.GUI;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;

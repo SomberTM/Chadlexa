@@ -1,4 +1,4 @@
-package Audio;
+package src.main.java.com.chadlexa.app.Audio;
 
 import java.io.ByteArrayOutputStream;
 
@@ -7,9 +7,12 @@ import javax.sound.sampled.DataLine;
 import javax.sound.sampled.Mixer;
 import javax.sound.sampled.TargetDataLine;
 
+import src.main.java.com.chadlexa.app.Utils.Audio;
+import src.main.java.com.chadlexa.app.Utils.Functional;
+
 public class Capture {
 
-    public AudioFormat format = Utils.Audio.getAudioFormat(Utils.Audio.Quality.HIGH);
+    public AudioFormat format = Audio.getAudioFormat(Audio.Quality.HIGH);
     public DataLine.Info dataLineInfo;
     public Mixer mixer;
 
@@ -39,7 +42,7 @@ public class Capture {
         } 
 
         if (this.targetDataLine != null)
-            Utils.Functional.createThread(() -> {
+            Functional.createThread(() -> {
                 outputStream = new ByteArrayOutputStream();
 
                 while (!stop) {

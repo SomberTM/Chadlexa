@@ -1,17 +1,20 @@
-import Audio.*;
+package src.main.java.com.chadlexa.app;
+
+import src.main.java.com.chadlexa.app.Audio.*;
+import src.main.java.com.chadlexa.app.GUI.*;
 
 public class Program {
 
 
-    static Audio.Capture audioCapture;
+    static Capture audioCapture;
 
     public static void main(String[] args) {
 
         InputDeviceSelector gui = InputDeviceSelector.spawn();
-        Class<GUI.Button> cast = GUI.Button.class;
+        Class<Button> cast = Button.class;
 
         gui.getButton("button_capture", cast).onClick(event -> {
-            Program.audioCapture = new Audio.Capture();
+            Program.audioCapture = new Capture();
             Program.audioCapture.capture(InputDeviceSelector.getSelectedMixer());
         });
 
@@ -20,7 +23,7 @@ public class Program {
         });
 
         gui.getButton("button_playback", cast).onClick(event -> {
-            new Audio.Playback(Program.audioCapture).playback();
+            new Playback(Program.audioCapture).playback();
         });
 
         gui.getButton("button_save_device", cast).onClick(event -> {
