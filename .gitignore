@@ -4,4 +4,6 @@ config.chad
 .project
 
 target/
+
 .vscode/
+.settings/
