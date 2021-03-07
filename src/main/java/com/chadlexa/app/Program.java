@@ -3,6 +3,7 @@ package com.chadlexa.app;
 import java.io.ByteArrayInputStream;
 
 import com.chadlexa.app.Audio.*;
+import com.chadlexa.app.Chad.File;
 import com.chadlexa.app.GUI.*;
 
 import com.ibm.cloud.sdk.core.http.Response;
@@ -17,12 +18,13 @@ public class Program {
     static Capture audioCapture;
 
     public static void main(String[] args) {
+        File env = new File("env.chad");
         InputDeviceSelector gui = InputDeviceSelector.spawn();
         Class<Button> cast = Button.class;
 
-        IamAuthenticator authenticator = new IamAuthenticator("Uj7t9ZU10lMabL1MK16OdjVm9DxNnZuh9SfDvTYLX4MK");
+        IamAuthenticator authenticator = new IamAuthenticator(env.get("ibm_api_key"));
         SpeechToText speech = new SpeechToText(authenticator);
-        speech.setServiceUrl("https://api.us-east.speech-to-text.watson.cloud.ibm.com/instances/10cea4d9-84b7-4e4c-af24-979f33bb3571");
+        speech.setServiceUrl(env.get("ibm_service_url"));
 
         gui.getButton("button_capture", cast).onClick(event -> {
             Program.audioCapture = new Capture();
