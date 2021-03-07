@@ -1,4 +1,4 @@
-package src.main.java.com.chadlexa.app.Audio;
+package com.chadlexa.app.Audio;
 
 import java.io.ByteArrayOutputStream;
 
@@ -7,8 +7,8 @@ import javax.sound.sampled.DataLine;
 import javax.sound.sampled.Mixer;
 import javax.sound.sampled.TargetDataLine;
 
-import src.main.java.com.chadlexa.app.Utils.Audio;
-import src.main.java.com.chadlexa.app.Utils.Functional;
+import com.chadlexa.app.Utils.Audio;
+import com.chadlexa.app.Utils.Functional;
 
 public class Capture {
 
@@ -27,9 +27,9 @@ public class Capture {
         this.dataLineInfo = new DataLine.Info(TargetDataLine.class, this.format);
     }
 
-    public ByteArrayOutputStream getCapturedData() { return this.outputStream; }
+    public ByteArrayOutputStream getOutputStream() { return this.outputStream; }
     
-    public void capture(Mixer mixer) {
+    public void start(Mixer mixer) {
         System.out.println("Capture request received");
         this.mixer = mixer;
 
@@ -54,7 +54,7 @@ public class Capture {
             }).start();
     }
 
-    public void stopCapture() {
+    public void stop() {
         System.out.println("Stop request received");
         this.stop = true;
     }

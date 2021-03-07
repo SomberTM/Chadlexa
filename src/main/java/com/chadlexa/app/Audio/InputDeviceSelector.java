@@ -1,4 +1,4 @@
-package src.main.java.com.chadlexa.app.Audio;
+package com.chadlexa.app.Audio;
 
 import java.awt.Component;
 
@@ -9,10 +9,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import src.main.java.com.chadlexa.app.Chad.File;
-import src.main.java.com.chadlexa.app.GUI.Button;
-import src.main.java.com.chadlexa.app.GUI.Manager;
-import src.main.java.com.chadlexa.app.Utils.Audio;
+import com.chadlexa.app.Chad.File;
+import com.chadlexa.app.GUI.Button;
+import com.chadlexa.app.GUI.Manager;
+import com.chadlexa.app.Utils.Audio;
 
 public class InputDeviceSelector extends Manager {
 

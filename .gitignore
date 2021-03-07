@@ -1,2 +1,9 @@
 config.chad
-/target
+
+.classpath
+.project
+
+target/
+
+.vscode/
+.settings/

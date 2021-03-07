@@ -1,4 +1,4 @@
-package src.main.java.com.chadlexa.app.GUI;
+package com.chadlexa.app.GUI;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,7 @@ import java.util.function.Consumer;
 import javax.swing.Icon;
 import javax.swing.JButton;
 
-import src.main.java.com.chadlexa.app.Utils.Functional;
+import com.chadlexa.app.Utils.Functional;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

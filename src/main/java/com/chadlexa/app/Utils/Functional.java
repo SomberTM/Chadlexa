@@ -1,4 +1,4 @@
-package src.main.java.com.chadlexa.app.Utils;
+package com.chadlexa.app.Utils;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
