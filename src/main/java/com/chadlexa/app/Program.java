@@ -1,7 +1,15 @@
-package src.main.java.com.chadlexa.app;
+package com.chadlexa.app;
 
-import src.main.java.com.chadlexa.app.Audio.*;
-import src.main.java.com.chadlexa.app.GUI.*;
+import java.io.ByteArrayInputStream;
+
+import com.chadlexa.app.Audio.*;
+import com.chadlexa.app.GUI.*;
+
+import com.ibm.cloud.sdk.core.http.Response;
+import com.ibm.cloud.sdk.core.security.IamAuthenticator;
+import com.ibm.watson.speech_to_text.v1.SpeechToText;
+import com.ibm.watson.speech_to_text.v1.model.RecognizeOptions;
+import com.ibm.watson.speech_to_text.v1.model.SpeechRecognitionResults;
 
 public class Program {
 
@@ -9,17 +17,32 @@ public class Program {
     static Capture audioCapture;
 
     public static void main(String[] args) {
-
         InputDeviceSelector gui = InputDeviceSelector.spawn();
         Class<Button> cast = Button.class;
 
+        IamAuthenticator authenticator = new IamAuthenticator("Uj7t9ZU10lMabL1MK16OdjVm9DxNnZuh9SfDvTYLX4MK");
+        SpeechToText speech = new SpeechToText(authenticator);
+        speech.setServiceUrl("https://api.us-east.speech-to-text.watson.cloud.ibm.com/instances/10cea4d9-84b7-4e4c-af24-979f33bb3571");
+
         gui.getButton("button_capture", cast).onClick(event -> {
             Program.audioCapture = new Capture();
-            Program.audioCapture.capture(InputDeviceSelector.getSelectedMixer());
+            Program.audioCapture.start(InputDeviceSelector.getSelectedMixer());
         });
 
         gui.getButton("button_stop", cast).onClick(event -> {
-            Program.audioCapture.stopCapture();
+            Program.audioCapture.stop();
+            try {
+                byte[] bytes = Program.audioCapture.getOutputStream().toByteArray();
+                ByteArrayInputStream stream = new ByteArrayInputStream(bytes);
+
+                int rate = (int) Program.audioCapture.format.getSampleRate();
+                RecognizeOptions options = new RecognizeOptions.Builder().contentType(String.format("audio/x-float-array;rate=%d", rate)).audio(stream).build();
+                
+                Response<SpeechRecognitionResults> results = speech.recognize(options).execute();
+                System.out.println(results.getResult().toString());
+            } catch (Exception e) {
+                System.out.println("Error recognizing audio " + e);
+            }
         });
 
         gui.getButton("button_playback", cast).onClick(event -> {

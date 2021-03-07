@@ -1,4 +1,4 @@
-package src.main.java.com.chadlexa.app.Utils;
+package com.chadlexa.app.Utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;

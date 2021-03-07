@@ -1,4 +1,4 @@
-package src.main.java.com.chadlexa.app.Audio;
+package com.chadlexa.app.Audio;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -8,7 +8,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.DataLine;
 import javax.sound.sampled.SourceDataLine;
 
-import src.main.java.com.chadlexa.app.Utils.Functional;
+import com.chadlexa.app.Utils.Functional;
 
 public class Playback {
     
@@ -23,7 +23,7 @@ public class Playback {
 
     public void playback() { 
         try {
-            this.playback(this.capture.getCapturedData().toByteArray()); 
+            this.playback(this.capture.getOutputStream().toByteArray()); 
         } catch (Exception exception) {
             System.out.println("No audio to playback");
         }
